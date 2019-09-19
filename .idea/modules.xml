@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/book/book.iml" filepath="$PROJECT_DIR$/book/book.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/bookNotesApp.iml" filepath="$PROJECT_DIR$/.idea/bookNotesApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/book-eureka-service-registry/eureka-service-registry.iml" filepath="$PROJECT_DIR$/book-eureka-service-registry/eureka-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notes/notes.iml" filepath="$PROJECT_DIR$/notes/notes.iml" />
       <module fileurl="file://$PROJECT_DIR$/book-spring-config-server/spring-config-server.iml" filepath="$PROJECT_DIR$/book-spring-config-server/spring-config-server.iml" />
     </modules>
   </component>
