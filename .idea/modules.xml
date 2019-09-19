@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/book/book.iml" filepath="$PROJECT_DIR$/book/book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/bookNotesApp.iml" filepath="$PROJECT_DIR$/.idea/bookNotesApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/book-eureka-service-registry/eureka-service-registry.iml" filepath="$PROJECT_DIR$/book-eureka-service-registry/eureka-service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/book-spring-config-server/spring-config-server.iml" filepath="$PROJECT_DIR$/book-spring-config-server/spring-config-server.iml" />
+    </modules>
+  </component>
+</project>
