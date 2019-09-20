@@ -6,14 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="book" />
-        <module name="eureka-service-registry" />
+        <module name="notes" />
         <module name="spring-config-server" />
+        <module name="eureka-service-registry" />
+        <module name="book" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="book" target="1.8" />
       <module name="eureka-service-registry" target="1.8" />
+      <module name="notes" target="1.8" />
       <module name="spring-config-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="book" options="-parameters" />
       <module name="eureka-service-registry" options="-parameters" />
+      <module name="notes" options="-parameters" />
       <module name="spring-config-server" options="-parameters" />
     </option>
   </component>
