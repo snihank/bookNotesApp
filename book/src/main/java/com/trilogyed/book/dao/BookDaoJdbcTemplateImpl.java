@@ -56,7 +56,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
         }
 
         @Override
-        public Book creatBook (Book book){
+        public Book createBook(Book book){
             jdbcTemplate.update(INSERT_BOOK_SQL,
                     book.getTitle(),
                     book.getAuthor());

@@ -9,7 +9,7 @@ public interface BookDao {
 
     List<Book> getAllBooks ();
 
-    Book creatBook(Book book);
+    Book createBook(Book book);
 
     void updateBook (Book book);
 
