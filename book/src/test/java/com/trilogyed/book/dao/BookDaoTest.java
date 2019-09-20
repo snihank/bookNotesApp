@@ -29,7 +29,7 @@ public class BookDaoTest {
         book.setTitle("Title");
         book.setAuthor("Author");
 
-        book= bookDao.creatBook(book);
+        book= bookDao.createBook(book);
 
         Book book2 = bookDao.getBook(book.getBookId());
 
@@ -49,13 +49,13 @@ public class BookDaoTest {
         book.setTitle("Title2");
         book.setAuthor("Author2");
 
-        bookDao.creatBook(book);
+        bookDao.createBook(book);
 
         book = new Book();
         book.setTitle("Title3");
         book.setAuthor("Author3");
 
-        bookDao.creatBook(book);
+        bookDao.createBook(book);
 
         List<Book> bList = bookDao.getAllBooks();
 
@@ -69,7 +69,7 @@ public class BookDaoTest {
         book.setTitle("Title");
         book.setAuthor("Author");
 
-        book= bookDao.creatBook(book);
+        book= bookDao.createBook(book);
 
         book.setTitle("Update");
         book.setAuthor("Update");

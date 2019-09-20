@@ -31,6 +31,9 @@ public class NotesDaoJdbcTemplateImpl implements NotesDao{
     private static final String DELETE_NOTE_SQL =
             "delete from note where note_id = ?";
 
+    private static final String DELETE_NOTE_BY_BOOK_ID_SQL =
+            "delete from note where book_id = ?";
+
     private static final String SELECT_NOTE_BY_BOOK =
             "select * from note where book_id = ?";
 
@@ -90,6 +93,11 @@ public class NotesDaoJdbcTemplateImpl implements NotesDao{
     @Override
     public void deleteNote(int noteId) {
         jdbcTemplate.update(DELETE_NOTE_SQL, noteId);
+    }
+
+
+    public void deleteNoteByBookId(int bookId) {
+        jdbcTemplate.update(DELETE_NOTE_BY_BOOK_ID_SQL, bookId);
     }
 
     @Override
