@@ -75,21 +75,27 @@ public class ServiceLayer {
 
 
 
-    public void removeConsole(int note_id)
+    public void removeNote(int note_id)
     {
         notesDao.deleteNote(note_id);
     }
 
+    public void removeNoteByBookId(int book_id)
+    {
+        notesDao.deleteNoteByBookId(book_id);
+    }
 
     public List<NotesViewModel> getNotesByBook(int bookId) {
         List<Notes> nList = notesDao.getNotesByBook(bookId);
         List<NotesViewModel> nvmList = new ArrayList<>();
+        List<NotesViewModel> emptyList = new ArrayList<>();
+
 
         for (Notes n : nList) {
             nvmList.add(buildNotesViewModel(n));
         }
         if (nList.size() == 0)
-            return null;
+            return emptyList;
         else
             return nvmList;
     }

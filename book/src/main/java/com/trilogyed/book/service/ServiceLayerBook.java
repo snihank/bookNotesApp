@@ -29,14 +29,16 @@ public class ServiceLayerBook {
     //Create a book
     public BookViewModel createBook(BookViewModel bvm){
 
-        bvm = buildBookViewModel(bookDao.createBook(buildBook(bvm)));
+        BookViewModel bvmFromDataBase = buildBookViewModel(bookDao.createBook(buildBook(bvm)));
+
+        bvm.setBookId(bvmFromDataBase.getBookId());
 
         List<NotesViewModel> nvmList = bvm.getNotes();
 
-        int bookId = bvm.getBookId();
+        int bookId = bvmFromDataBase.getBookId();
 
         //Set the bookId for all the Notes
-        nvmList.stream().forEach(notesViewModel -> notesViewModel.setBookId(bookId));
+        //nvmList.stream().forEach(notesViewModel -> notesViewModel.setBookId(bookId));
 
 
         //Build message and Send the List to the queue
@@ -59,7 +61,7 @@ public class ServiceLayerBook {
         List<BookViewModel> bookViewModelList = new ArrayList<>();
 
         //Stores all the NotesViewModel for a book
-        List<NotesViewModel> notesForBook;
+        List<NotesViewModel> notesForBook = new ArrayList<>();
 
         for(int i = 0; i < bookList.size(); i ++){
 
@@ -69,14 +71,19 @@ public class ServiceLayerBook {
             notesForBook =
                     allNotesForAllBooks
                     .stream()
-                    .filter(notesViewModel -> notesViewModel.getBookId() == bookList.get(bookId).getBookId())
+                    .filter(notesViewModel -> notesViewModel.getBookId() == bookId)
                     .collect(Collectors.toList());
 
             BookViewModel bvm = new BookViewModel();
             bvm.setBookId(book.getBookId());
             bvm.setAuthor(book.getAuthor());
             bvm.setTitle(book.getTitle());
-            bvm.setNotes(notesForBook);
+
+            if(notesForBook.size()==0){
+                bvm.setNotes(null);
+            }else{
+                bvm.setNotes(notesForBook);
+            }
 
             bookViewModelList.add(bvm);
         }
@@ -90,10 +97,15 @@ public class ServiceLayerBook {
 
         BookViewModel bvm = buildBookViewModel(bookDao.getBook(bookId));
 
-        List<NotesViewModel> nvmList = client.getNotesByBook(bookId);
+        if(bvm == null){
+            throw new IllegalArgumentException("Book not found in the database");
+        }else{
+            List<NotesViewModel> nvmList = client.getNotesByBook(bookId);
 
-        bvm.setNotes(nvmList);
-
+            if(nvmList != null){
+                bvm.setNotes(nvmList);
+            }
+        }
         return bvm;
     }
 
@@ -114,9 +126,13 @@ public class ServiceLayerBook {
     public BookViewModel buildBookViewModel(Book book){
         BookViewModel bvm = new BookViewModel();
 
-        bvm.setBookId(book.getBookId());
-        bvm.setTitle(book.getTitle());
-        bvm.setAuthor(book.getAuthor());
+        if(book == null){
+            bvm = null;
+        }else{
+            bvm.setBookId(book.getBookId());
+            bvm.setTitle(book.getTitle());
+            bvm.setAuthor(book.getAuthor());
+        }
 
         return bvm;
     }
@@ -130,6 +146,40 @@ public class ServiceLayerBook {
 
         return book;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Create a Note
+    public NotesViewModel createNote(NotesViewModel nvm){
+
+        return client.createNote(nvm);
+    }
+
+    //Get all notes by book
+    public List<NotesViewModel> getNotesByBook(int bookId){
+
+        return client.getNotesByBook(bookId);
+    }
+
+    //Get all notes
+    public List<NotesViewModel> getAllNotes(){
+
+        return client.getAllNotes();
+    }
+
+    //Update note if book exist
+    public void updateNote(int noteId,NotesViewModel nvm){
+
+        client.updateNote(noteId,nvm);
+    }
+
+    //Delete note if book exist
+    public void deleteNote(int noteId){
+
+        client.deleteNote(noteId);
+    }
+
 }
 
 //bookList.stream().forEach(book -> nvmList.add(client.getNotesByBook(book.getBookId())));

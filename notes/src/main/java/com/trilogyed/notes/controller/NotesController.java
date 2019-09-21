@@ -46,25 +46,33 @@ public class NotesController {
     //Get Notes by Book
     @GetMapping("/book/{book_id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<NotesViewModel> getNotesByBook(@PathVariable("book_id") int bookId) {
+    public List<NotesViewModel> getNotesByBook(@PathVariable(name = "book_id") int bookId) {
         List<NotesViewModel> nvmList = service.getNotesByBook(bookId);
         if (nvmList.size() == 0)
-            throw new NotFoundException("Cannot find book" + bookId);
+            return null;
+            //throw new NotFoundException("Cannot find book" + bookId);
         return nvmList;
     }
 
-    //Delete Note
+    //Delete Note by book_id
+    @DeleteMapping("/book/{book_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteNoteByBookId(@PathVariable(name = "book_id") int bookId){
+        service.removeNoteByBookId(bookId);
+    }
+
+    //Delete Note by note_id
     @DeleteMapping("/{note_id}")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteConsole(@PathVariable("note_id") int noteId){
-        service.removeConsole(noteId);
+    public String deleteNote(@PathVariable(name = "note_id") int noteId){
+        service.removeNote(noteId);
         return "Note successfully deleted.";
     }
 
     //Update Note
     @PutMapping("/{note_id}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateConsole(@PathVariable("note_id") int noteId, @RequestBody @Valid NotesViewModel nvm) {
+    public String updateConsole(@PathVariable(name = "note_id") int noteId, @RequestBody @Valid NotesViewModel nvm) {
         service.updateNote(nvm);
         return "Note successfully updated.";
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "note-service")
+@FeignClient(name = "notes-service")
 public interface NoteClient {
 
     //Create note
@@ -23,4 +23,12 @@ public interface NoteClient {
     //Get all Notes
     @RequestMapping(value = "/notes", method = RequestMethod.GET)
     public List<NotesViewModel> getAllNotes();
+
+    //Update Note
+    @RequestMapping(value = "/notes/{note_id}", method = RequestMethod.PUT)
+    public void updateNote(@PathVariable(name = "note_id") int noteId, @RequestBody NotesViewModel nvm);
+
+    //Delete Note
+    @RequestMapping(value = "/notes/{note_id}", method = RequestMethod.DELETE)
+    public void deleteNote(@PathVariable(name = "note_id") int noteId);
 }

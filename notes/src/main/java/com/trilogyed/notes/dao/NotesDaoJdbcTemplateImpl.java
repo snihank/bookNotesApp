@@ -95,7 +95,7 @@ public class NotesDaoJdbcTemplateImpl implements NotesDao{
         jdbcTemplate.update(DELETE_NOTE_SQL, noteId);
     }
 
-
+    @Override
     public void deleteNoteByBookId(int bookId) {
         jdbcTemplate.update(DELETE_NOTE_BY_BOOK_ID_SQL, bookId);
     }
